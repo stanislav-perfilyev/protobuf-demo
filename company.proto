@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package company;
+
+// Модель информации о предприятии
+message Company {
+  required int32 founded_year = 1;         // foundation year
+  required string legal_address = 2;       // juridical address
+  required string name = 3;                // name of the company
+  optional string industry = 4;            // sort of activity (optional)
+  optional bool has_foreign_trade = 5;     // foreign trade activity (optional)
+}
