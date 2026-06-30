@@ -1,7 +1,6 @@
 #include "company_repository.h"
 #include "company.pb.h"
 
-#include <sstream>
 #include <stdexcept>
 
 // ── Serialization ──────────────────────────────────────────────────────────
