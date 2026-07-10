@@ -66,7 +66,7 @@ TEST(CompanySerialization, DeserializeRestoresOptionalFields)
 
 TEST(CompanySerialization, MalformedDataThrowsProtoError)
 {
-    EXPECT_THROW(CompanyRepository::deserialize("not-valid-protobuf-data"), ProtoError);
+    EXPECT_THROW((void)CompanyRepository::deserialize("not-valid-protobuf-data"), ProtoError);
 }
 
 // ── Validation ────────────────────────────────────────────────────────────

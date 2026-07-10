@@ -60,7 +60,7 @@ jobs:
             --std=c++20 \
             --suppress=missingInclude \
             --suppress=missingIncludeSystem \
-            --suppress=unusedFunction \
+            --suppress=unmatchedSuppression \
             --suppress=checkersReport \
             --error-exitcode=1 \
             --quiet \
