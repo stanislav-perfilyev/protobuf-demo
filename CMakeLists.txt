@@ -11,6 +11,9 @@ message(STATUS "Using protobuf ${Protobuf_VERSION}")
 # Generate C++ from .proto
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS proto/company.proto)
 
+# Suppress warnings on generated protobuf sources (not our code)
+set_source_files_properties(\${PROTO_SRCS} PROPERTIES COMPILE_OPTIONS "-w")
+
 # ── Library (shared between app and tests) ───────────────────────────────
 add_library(company_lib
     src/company_repository.cpp
@@ -22,6 +25,10 @@ target_include_directories(company_lib PUBLIC
     ${Protobuf_INCLUDE_DIRS}
 )
 target_link_libraries(company_lib PUBLIC ${Protobuf_LIBRARIES})
+target_compile_options(company_lib PRIVATE
+    $<$<CXX_COMPILER_ID:GNU,Clang>:-Wall -Wextra -Werror -Wpedantic>
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+)
 
 # ── Main executable ───────────────────────────────────────────────────────
 add_executable(protobuf_demo src/main.cpp)
@@ -44,6 +51,10 @@ enable_testing()
 
 add_executable(protobuf_demo_tests tests/test_company.cpp)
 target_link_libraries(protobuf_demo_tests PRIVATE company_lib gtest_main)
+target_compile_options(protobuf_demo_tests PRIVATE
+    $<$<CXX_COMPILER_ID:GNU,Clang>:-Wall -Wextra -Werror -Wpedantic>
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+)
 
 include(GoogleTest)
 gtest_discover_tests(protobuf_demo_tests)
