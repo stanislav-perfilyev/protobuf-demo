@@ -83,4 +83,11 @@ public:
     void add(const company::Company& company);
 
     /** @brief Number of companies in the store. */
-    [[nodiscard]] std::size_t size() const noexcept { return st
+    [[nodiscard]] std::size_t size() const noexcept { return store_.size(); }
+
+    /** @brief Retrieve all stored companies. */
+    [[nodiscard]] const std::vector<company::Company>& all() const noexcept { return store_; }
+
+private:
+    std::vector<company::Company> store_;
+};
