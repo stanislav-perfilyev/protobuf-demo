@@ -1,5 +1,4 @@
 #include "company_repository.h"
-#include "company.pb.h"
 
 #include <stdexcept>
 
@@ -30,7 +29,7 @@ void CompanyRepository::validate(const company::Company& c)
         throw ValidationError("Company name must not be empty");
     if (c.legal_address().empty())
         throw ValidationError("Company legal_address must not be empty");
-    if (c.founded_year() < 1800 || c.founded_year() > 2100) {
+    if (c.founded_year() < kMinFoundedYear || c.founded_year() > kMaxFoundedYear) {
         throw ValidationError(
             "founded_year " + std::to_string(c.founded_year())
             + " is out of range [1800, 2100]");

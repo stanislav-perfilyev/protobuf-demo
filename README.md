@@ -9,6 +9,16 @@ C++20 demo: serialise and deserialise company records with Protocol Buffers (pro
 - `src/main.cpp` — CLI demo
 - `tests/test_company.cpp` — 14 GTest cases (roundtrip, serialization, validation, repository)
 
+## Usage
+
+After building, run the CLI demo:
+
+```bash
+./build/protobuf_demo
+```
+
+It serializes two company records, validates them, round-trips through the wire format, and prints results to stdout.
+
 ## Build
 
 ```bash

@@ -1,11 +1,10 @@
 #pragma once
 
+#include "company.pb.h"
+
 #include <stdexcept>
 #include <string>
 #include <vector>
-
-// Forward-declare to avoid exposing generated protobuf headers in the interface
-namespace company { class Company; }
 
 /**
  * @brief Serialization / deserialization errors.
@@ -35,6 +34,11 @@ class ValidationError : public ProtoError {
 class CompanyRepository {
 public:
     CompanyRepository() = default;
+
+    /** @brief Minimum valid founded_year (inclusive). */
+    static constexpr int kMinFoundedYear = 1800;
+    /** @brief Maximum valid founded_year (inclusive). */
+    static constexpr int kMaxFoundedYear = 2100;
 
     /**
      * @brief Serialize a Company to binary wire format.
@@ -79,11 +83,4 @@ public:
     void add(const company::Company& company);
 
     /** @brief Number of companies in the store. */
-    [[nodiscard]] std::size_t size() const noexcept { return store_.size(); }
-
-    /** @brief Retrieve all stored companies. */
-    [[nodiscard]] const std::vector<company::Company>& all() const noexcept { return store_; }
-
-private:
-    std::vector<company::Company> store_;
-};
+    [[nodiscard]] std::size_t size() const noexcept { return st
